@@ -1,0 +1,16 @@
+import { createApp } from "vue";
+import App from "./App.vue";
+import { router } from "./route";
+import "./route/monitor";
+const app = createApp(App);
+import Vant from "vant";
+import less from "less";
+import "@/config/config.less";
+import "lib-flexible/flexible";
+import "vant/lib/index.css";
+import store from "./store";
+app.use(Vant);
+app.use(less);
+app.use(store);
+app.use(router);
+app.mount("#app");
