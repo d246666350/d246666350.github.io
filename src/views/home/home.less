@@ -1,0 +1,54 @@
+@delay: 3s;
+@delay1: 0s;
+
+@keyframes wave {
+    0% {
+        background-position: center right;
+    }
+
+    100% {
+        background-position: center left;
+    }
+}
+
+@keyframes roll {
+    0% {
+        transform: rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+@keyframes title {
+    0% {
+        top: -4vw;
+    }
+
+    100% {
+        top: calc(30vh - 8vw);
+    }
+}
+
+@keyframes mark {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes protagonist {
+    0% {
+        bottom: 10vw;
+        right: 10vw;
+    }
+
+    100% {
+        bottom: 10vw;
+        right: 55vw;
+    }
+}
