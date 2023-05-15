@@ -1,0 +1,278 @@
+<template lang="pug">
+block content
+._paga_content(:class="contentClass")
+  img.sky(src="@/assets/home/sky.png", alt="")
+  .cloud
+  .cloud1
+  .road
+  .car
+    img.car_body(src="@/assets/home/car.png", alt="")
+    img.run(src="@/assets/home/run.png", alt="")
+    img.run1(src="@/assets/home/run.png", alt="")
+  img.protagonist(src="@/assets/home/protagonist.gif", alt="")
+  span.title 寻遇之旅
+  .btn(@click="start") 开始
+  .mark(
+    :class="[showMark ? '' : 'hidden', canClick ? 'click' : '']",
+    @click="clickMark"
+  )
+    .text {{ markText }}
+    van-icon.next(
+      v-if="canClick",
+      name="arrow-down",
+      color="white",
+      size="5vh"
+    )
+</template>
+    
+    <script >
+import { defineComponent, ref, onMounted } from "vue";
+export default defineComponent({
+  setup(props, { emit }) {
+    const contentClass = ref("");
+    const canClick = ref(false);
+    let processing = false;
+    const start = () => {
+      if (processing) return;
+      processing = true;
+      contentClass.value = "animate";
+      setTimeout(() => {
+        showMark.value = true;
+        setTimeout(() => {
+          let text = `今天的天气正如同我们此刻的心情，阳光又明媚，今天是我的女儿小墨期待了很久的日子，我们和她约定好在今天带她出游，去往她期待已久的小公园玩...`;
+          const interval = setInterval(() => {
+            if (text.length > 0) {
+              markText.value = markText.value + text[0];
+              text = text.substring(1);
+            } else {
+              clearInterval(interval);
+              canClick.value = true;
+            }
+          }, 100);
+        }, 2000);
+      }, 3000);
+    };
+    const markText = ref("");
+    const showMark = ref(true);
+    const clickMark = () => {
+      emit("showNext");
+    };
+    onMounted(() => {
+      showMark.value = false;
+    });
+    return { contentClass, start, showMark, markText, canClick, clickMark };
+  },
+});
+</script>
+    
+<style lang="less" scoped>
+@import url(./first.less);
+._paga_content {
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  &.animate {
+    .road {
+      animation-name: wave;
+      animation-direction: normal;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-duration: 10s;
+      animation-delay: @delay;
+    }
+    .car {
+      .run {
+        animation-name: roll;
+        animation-direction: normal;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-duration: 1s;
+        animation-delay: @delay;
+      }
+      .run1 {
+        animation-name: roll;
+        animation-direction: normal;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-duration: 1s;
+        animation-delay: @delay;
+      }
+    }
+    .protagonist {
+      animation-name: protagonist;
+      animation-direction: normal;
+      animation-timing-function: linear;
+      animation-duration: 2s;
+      animation-delay: @delay1;
+      animation-fill-mode: forwards;
+    }
+    .title {
+      animation-name: disappear;
+      animation-direction: normal;
+      animation-timing-function: linear;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+    }
+    .btn {
+      animation-name: disappear;
+      animation-direction: normal;
+      animation-timing-function: linear;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+    }
+  }
+  img {
+    position: absolute;
+    &.sky {
+      width: 44 / 1280 * 5120vh;
+      height: 44vh;
+      .center;
+    }
+  }
+  .cloud {
+    position: absolute;
+    width: 44 / 1280 * 2 * 5120vh;
+    height: 44vh;
+    .center;
+    background-image: url(~@/assets/home/cloud.png);
+    background-size: 50% 100%;
+    animation-name: wave;
+    animation-direction: normal;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-duration: 20s;
+  }
+  .cloud1 {
+    position: absolute;
+    width: 44 / 1280 * 2 * 5120vh;
+    height: 44vh;
+    .center;
+    background-image: url(~@/assets/home/cloud1.png);
+    background-size: 50% 100%;
+    animation-name: wave;
+    animation-direction: normal;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-duration: 25s;
+  }
+  .road {
+    background-image: url(~@/assets/home/road.png);
+    background-size: 50% 100%;
+    width: 75 / 1280 * 2 * 5120vh;
+    height: 75vh;
+    position: absolute;
+    bottom: 0;
+    // animation-name: wave;
+    // animation-direction: normal;
+    // animation-timing-function: linear;
+    // animation-iteration-count: infinite;
+    // animation-duration: 10s;
+    // animation-delay: @delay;
+  }
+  .car {
+    position: absolute;
+    bottom: 20vh;
+    left: 10%;
+    width: 20 / 1280 * 2 * 1312vh;
+    height: 20vh;
+    .car_body {
+      width: 20 / 1280 * 2 * 1312vh;
+      height: 20vh;
+    }
+    .run {
+      width: 222 / 4 / 7.2vh;
+      height: 224 / 4 / 7.2vh;
+      top: 15vh;
+      left: 19%;
+      // animation-name: roll;
+      // animation-direction: normal;
+      // animation-timing-function: linear;
+      // animation-iteration-count: infinite;
+      // animation-duration: 1s;
+      // animation-delay: @delay;
+    }
+    .run1 {
+      width: 222 / 4 / 7.2vh;
+      height: 224 / 4 / 7.2vh;
+      top: 15vh;
+      right: 17%;
+      // animation-name: roll;
+      // animation-direction: normal;
+      // animation-timing-function: linear;
+      // animation-iteration-count: infinite;
+      // animation-duration: 1s;
+      // animation-delay: @delay;
+    }
+  }
+  .protagonist {
+    width: 720 / 4 / 7.2vh;
+    height: 720 / 4 / 7.2vh;
+    position: absolute;
+    bottom: 12vh;
+    right: 2vh;
+    // animation-name: protagonist;
+    // animation-direction: normal;
+    // animation-timing-function: linear;
+    // animation-duration: 2s;
+    // animation-delay: @delay1;
+    // animation-fill-mode: forwards;
+  }
+  .title {
+    position: absolute;
+    font-family: mianfeiziti;
+    color: black;
+    text-shadow: 0 1px white, 1px 0 white, -1px 0 white, 0 -1px white;
+    font-size: 10vw;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-name: title;
+    animation-direction: normal;
+    animation-timing-function: ease-out;
+    animation-duration: 2s;
+    top: 20vh;
+    pointer-events: none;
+  }
+  .btn {
+    background-image: url(~@/assets/home/btn.png);
+    background-size: 100% 100%;
+    width: 100 / 5120 * 859vw;
+    height: 100 / 5120 * 364vw;
+    position: absolute;
+    top: 80vw;
+    left: 50%;
+    transform: translateX(-50%) scale(1.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4vw;
+    font-family: mianfeiziti;
+  }
+  .mark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: 1;
+    pointer-events: none;
+    transition: all 4s;
+    &.hidden {
+      opacity: 0;
+    }
+    &.click {
+      pointer-events: auto;
+    }
+    .text {
+      margin: 25vh 12.5% 0;
+      color: white;
+      font-family: mianfeiziti;
+      font-size: 5vw;
+      line-height: 200%;
+    }
+  }
+}
+</style>
