@@ -21,7 +21,6 @@ export default defineComponent({
   setup() {
     const contentClass = ref("");
     const start = () => {
-      console.log("click");
       contentClass.value = "animate";
     };
     return { contentClass, start };
