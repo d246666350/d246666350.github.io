@@ -10,8 +10,9 @@ block content
     img.run(src="@/assets/home/run.png", alt="")
     img.run1(src="@/assets/home/run.png", alt="")
   img.protagonist(src="@/assets/home/protagonist.gif", alt="")
-  span.title 寻遇之旅
-  .btn(@click="start") 开始
+  //- span.title 寻遇之旅
+  img.title(src="@/assets/home/title.png", alt="")
+  .btn(@click="start")
   .mark(
     :class="[showMark ? '' : 'hidden', canClick ? 'click' : '']",
     @click="clickMark"
@@ -24,8 +25,8 @@ block content
       size="5vh"
     )
 </template>
-    
-    <script >
+
+<script>
 import { defineComponent, ref, onMounted } from "vue";
 export default defineComponent({
   setup(props, { emit }) {
@@ -64,7 +65,7 @@ export default defineComponent({
   },
 });
 </script>
-    
+
 <style lang="less" scoped>
 @import url(./first.less);
 ._paga_content {
@@ -225,29 +226,28 @@ export default defineComponent({
     font-family: mianfeiziti;
     color: black;
     text-shadow: 0 1px white, 1px 0 white, -1px 0 white, 0 -1px white;
-    font-size: 10vw;
     left: 50%;
     transform: translateX(-50%);
     animation-name: title;
     animation-direction: normal;
     animation-timing-function: ease-out;
     animation-duration: 2s;
-    top: 20vh;
+    top: 10vh;
     pointer-events: none;
+    height: 18vh;
   }
   .btn {
-    background-image: url(~@/assets/home/btn.png);
+    background-image: url(~@/assets/home/start.png);
     background-size: 100% 100%;
-    width: 100 / 5120 * 859vw;
-    height: 100 / 5120 * 364vw;
+    width: 8 / 1194 * 2106vh;
+    height: 8vh;
     position: absolute;
-    top: 80vw;
+    top: 40vh;
     left: 50%;
     transform: translateX(-50%) scale(1.8);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 4vw;
     font-family: mianfeiziti;
   }
   .mark {
