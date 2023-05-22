@@ -1,14 +1,18 @@
 <template lang="pug">
 block content
 .__content
-  First.page(@showNext="showNext", :class="current === 0 ? '' : 'hidden'")
-  Second.page(:class="current === 1 ? '' : 'hidden'")
+  First.page(
+    v-if="modalCtrl[0]",
+    @showNext="showNext",
+    :class="current === 0 ? '' : 'hidden'"
+  )
+  Second.page(v-if="modalCtrl[1]", :class="current === 1 ? '' : 'hidden'")
 </template>
 
 <script >
 import First from "./components/first";
 import Second from "./components/second";
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, nextTick } from "vue";
 export default defineComponent({
   components: {
     First,
@@ -16,13 +20,20 @@ export default defineComponent({
   },
   setup() {
     const current = ref(0);
+    const modalCtrl = ref([true, false]);
     const showNext = () => {
-      console.log("showNext");
-      current.value = 1;
+      modalCtrl.value[current.value + 1] = true;
+      setTimeout(() => {
+        current.value += 1;
+        setTimeout(() => {
+          modalCtrl.value[current.value - 1] = false;
+        }, 2000);
+      }, 50);
     };
     return {
       current,
       showNext,
+      modalCtrl,
     };
   },
 });
