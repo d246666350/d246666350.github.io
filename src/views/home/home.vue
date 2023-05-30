@@ -19,10 +19,10 @@ export default defineComponent({
     Second,
   },
   setup() {
-    const current = ref(0);
-    const modalCtrl = ref([true, false]);
-    // const current = ref(1);
-    // const modalCtrl = ref([false, true]);
+    // const current = ref(0);
+    // const modalCtrl = ref([true, false]);
+    const current = ref(1);
+    const modalCtrl = ref([false, true]);
     const showNext = () => {
       modalCtrl.value[current.value + 1] = true;
       setTimeout(() => {
