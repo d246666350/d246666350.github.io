@@ -12,7 +12,7 @@ block content
 <script >
 import First from "./components/first";
 import Second from "./components/second";
-import { defineComponent, ref, nextTick } from "vue";
+import { defineComponent, ref } from "vue";
 export default defineComponent({
   components: {
     First,
