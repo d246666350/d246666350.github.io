@@ -1,20 +1,23 @@
 <template lang="pug">
 block content
-._page_content(:class="'content_'+current")
+._page_content(:class="'content_' + current")
   //- img.bg(src="@/assets/home/park.png", alt="")
   img.bg(src="@/assets/home/bg_0.png", alt="")
-  img.dog(:src="dogSrc"
-      @click="showText")
-  img.bg(src="@/assets/home/bg_1.png", alt="")
   .box
     img.protagonist.protagonist2(src="@/assets/home/protagonist2.gif", alt="")
     img.protagonist.protagonist0(
-      :src="protagonist0Src"
-      alt=""
-      @click="showText"
+      :src="protagonist0Src",
+      alt="",
+      @click="showText",
       @animationend="changeProtagonist0"
     )
     img.protagonist.protagonist1(src="@/assets/home/protagonist1.gif", alt="")
+  img.dog(:src="dogSrc", @click="showText")
+  img.bg(src="@/assets/home/bg_1.png", alt="")
+  .camera(v-if="showCameraIcon", :class="cameraMask")
+    img(src="@/assets/home/camera.png", @click="makePhoto")
+  .photo(v-if="showPhoto")
+    img(src="@/assets/home/photo.png")
 Dialog(ref="dialog", @close="next")
 </template>
 
@@ -39,6 +42,7 @@ export default defineComponent({
       loading = false;
     };
     let current = ref(0);
+    const showCameraIcon = ref(false);
     let loading = true;
     const showText = () => {
       if (!loading) {
@@ -57,7 +61,23 @@ export default defineComponent({
     const next = (step) => {
       loading = false;
       current.value = step + 1;
+      if (current.value === 3) {
+        setTimeout(() => {
+          showCameraIcon.value = true;
+        }, 5500);
+      }
     };
+    const cameraMask = ref("");
+    const showPhoto = ref(false);
+
+    const makePhoto = () => {
+      cameraMask.value = "white";
+      setTimeout(() => {
+        showCameraIcon.value = false;
+        showPhoto.value = true;
+      }, 200);
+    };
+
     return {
       protagonist0Src,
       changeProtagonist0,
@@ -67,6 +87,10 @@ export default defineComponent({
       next,
       current,
       dogSrc,
+      showCameraIcon,
+      makePhoto,
+      cameraMask,
+      showPhoto,
     };
   },
 });
@@ -74,8 +98,8 @@ export default defineComponent({
 
 <style lang="less" scoped>
 @import url(./second.less);
-// @time: 5s;
-@time: 1s;
+@time: 5s;
+// @time: 1s;
 .content_0 {
   .bg {
     left: calc(-55 / 720 * 1280vh);
@@ -150,13 +174,14 @@ export default defineComponent({
 }
 .content_3 {
   .bg {
-    left: calc(-55 / 720 * 1280vh);
+    left: calc(-35 / 720 * 1280vh);
   }
   .box {
     .protagonist {
       top: 45vh;
       left: 0;
       &.protagonist0 {
+        pointer-events: none;
         left: 680 / 4 / 7.2vh;
       }
       &.protagonist1 {
@@ -169,7 +194,9 @@ export default defineComponent({
     }
   }
   .dog {
-    left: calc(-40 / 720 * 1280vh + 3vh);
+    top: 62vh !important;
+    left: -6vh;
+    pointer-events: none;
   }
 }
 ._page_content {
@@ -189,6 +216,7 @@ export default defineComponent({
     animation-iteration-count: 1;
     animation-duration: 5s;
     pointer-events: none;
+    top: 0;
   }
   .box {
     position: relative;
@@ -220,6 +248,46 @@ export default defineComponent({
     position: absolute;
     width: 0.8 * 720 / 4 / 7.2vh;
     height: 0.8 * 720 / 4 / 7.2vh;
+  }
+  .camera {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    background: rgba(#ececec, 0.3);
+    animation-name: disappear;
+    animation-direction: reverse;
+    animation-iteration-count: 1;
+    animation-duration: 0.5s;
+    transition: all 0.1s;
+    &.white {
+      background: white;
+    }
+    img {
+      width: 15vh;
+      height: 15vh;
+    }
+  }
+  .photo {
+    position: fixed;
+    top: 63vh;
+    left: calc(5vw - 10px);
+    border: 10px white solid;
+    box-shadow: 0 0 20px rgba(#ececec, 0.3);
+    animation-name: photo;
+    animation-iteration-count: 1;
+    transform: rotate3d(5, -2, 0.7, 45deg) scale(0);
+    animation-duration: 3s;
+    img {
+      width: 90vw;
+      height: 90 / 16 * 9vw;
+      object-fit: fill;
+      margin: -2px;
+    }
   }
 }
 </style>
