@@ -12,7 +12,7 @@ block content
       @animationend="changeProtagonist0"
     )
     img.protagonist.protagonist1(src="@/assets/home/protagonist1.gif", alt="")
-  img.dog(:src="dogSrc", @click="showText")
+  img.dog(:src="dogSrc", @click="showText", :class="dogClass")
   img.bg(src="@/assets/home/bg_1.png", alt="")
   .camera(v-if="showCameraIcon", :class="cameraMask")
     img(src="@/assets/home/camera.png", @click="makePhoto")
@@ -27,12 +27,13 @@ import protagonist0_text from "@/assets/home/protagonist0_text.gif";
 import protagonist0 from "@/assets/home/protagonist.gif";
 import dog from "@/assets/home/dog.gif";
 import dog_text from "@/assets/home/dog_text.gif";
+import dog_h from "@/assets/home/dog_h.gif";
 import Dialog from "./dialog";
 export default defineComponent({
   components: {
     Dialog,
   },
-  setup() {
+  setup(props, { emit }) {
     const dialog = ref(null);
     const protagonist0Src = ref(protagonist0);
     const dogSrc = ref(dog_text);
@@ -62,9 +63,12 @@ export default defineComponent({
       loading = false;
       current.value = step + 1;
       if (current.value === 3) {
+        dogClass.value = "dog_3";
         setTimeout(() => {
           showCameraIcon.value = true;
         }, 5500);
+      } else {
+        dogClass.value = "";
       }
     };
     const cameraMask = ref("");
@@ -72,11 +76,18 @@ export default defineComponent({
 
     const makePhoto = () => {
       cameraMask.value = "white";
+      dogSrc.value = dog_h;
       setTimeout(() => {
         showCameraIcon.value = false;
         showPhoto.value = true;
+        setTimeout(() => {
+          next(3);
+          emit("showNext");
+        }, 5000);
       }, 200);
     };
+
+    const dogClass = ref("");
 
     return {
       protagonist0Src,
@@ -91,6 +102,7 @@ export default defineComponent({
       makePhoto,
       cameraMask,
       showPhoto,
+      dogClass,
     };
   },
 });
@@ -193,10 +205,42 @@ export default defineComponent({
       }
     }
   }
-  .dog {
+  .dog_3 {
     top: 62vh !important;
-    left: -6vh;
+    left: -100vw;
     pointer-events: none;
+    animation-name: dog;
+    animation-direction: normal;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-duration: 2s;
+    animation-delay: @time;
+    animation-fill-mode: forwards;
+  }
+}
+.content_4 {
+  .bg {
+    left: calc(-35 / 720 * 1280vh + 100vw);
+  }
+  .box {
+    .protagonist {
+      top: 45vh;
+      left: 0;
+      &.protagonist0 {
+        pointer-events: none;
+        left: calc(680 / 4 / 7.2 * 1vh - 50vw);
+      }
+      &.protagonist1 {
+        top: 60vh;
+        left: calc(480 / 4 / 7.2 * 1vh - 50vw);
+      }
+      &.protagonist2 {
+        left: calc(-40 / 4 / 7.2 * 1vh - 50vw);
+      }
+    }
+  }
+  .dog {
+    left: -6vh;
   }
 }
 ._page_content {
@@ -238,6 +282,7 @@ export default defineComponent({
     animation-delay: 4s;
     transition: all @time;
     &.protagonist1 {
+      pointer-events: none;
       width: 0.9 * 720 / 4 / 7.2vh;
       height: 0.9 * 720 / 4 / 7.2vh;
     }
@@ -274,14 +319,16 @@ export default defineComponent({
   }
   .photo {
     position: fixed;
-    top: 63vh;
+    top: calc(50vh - 45 / 16 * 9vw);
     left: calc(5vw - 10px);
     border: 10px white solid;
     box-shadow: 0 0 20px rgba(#ececec, 0.3);
     animation-name: photo;
     animation-iteration-count: 1;
-    transform: rotate3d(5, -2, 0.7, 45deg) scale(0);
+    // transform: rotate3d(5, -2, 0.7, 45deg) scale(0);
     animation-duration: 3s;
+    animation-fill-mode: forwards;
+    animation-delay: 2s;
     img {
       width: 90vw;
       height: 90 / 16 * 9vw;

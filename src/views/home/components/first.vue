@@ -13,11 +13,11 @@ block content
   //- span.title 寻遇之旅
   img.title(src="@/assets/home/title.png", alt="")
   .btn(@click="start")
-  .mark(
-    :class="[showMark ? '' : 'hidden', canClick ? 'click' : '']",
-    @click="clickMark"
+  .mask(
+    :class="[showMask ? '' : 'hidden', canClick ? 'click' : '']",
+    @click="clickMask"
   )
-    .text {{ markText }}
+    .text {{ maskText }}
     van-icon.next(
       v-if="canClick",
       name="arrow-down",
@@ -28,6 +28,7 @@ block content
 
 <script>
 import { defineComponent, ref, onMounted } from "vue";
+import allText from "./text";
 export default defineComponent({
   setup(props, { emit }) {
     const contentClass = ref("");
@@ -38,12 +39,12 @@ export default defineComponent({
       processing = true;
       contentClass.value = "animate";
       setTimeout(() => {
-        showMark.value = true;
+        showMask.value = true;
         setTimeout(() => {
-          let text = `今天的天气正如同我们此刻的心情，阳光又明媚，今天是我的女儿小墨期待了很久的日子，我们和她约定好在今天带她出游，去往她期待已久的小公园玩...`;
+          let text = allText.first;
           const interval = setInterval(() => {
             if (text.length > 0) {
-              markText.value = markText.value + text[0];
+              maskText.value = maskText.value + text[0];
               text = text.substring(1);
             } else {
               clearInterval(interval);
@@ -53,15 +54,15 @@ export default defineComponent({
         }, 2000);
       }, 3000);
     };
-    const markText = ref("");
-    const showMark = ref(true);
-    const clickMark = () => {
+    const maskText = ref("");
+    const showMask = ref(true);
+    const clickMask = () => {
       emit("showNext");
     };
     onMounted(() => {
-      showMark.value = false;
+      showMask.value = false;
     });
-    return { contentClass, start, showMark, markText, canClick, clickMark };
+    return { contentClass, start, showMask, maskText, canClick, clickMask };
   },
 });
 </script>
@@ -250,7 +251,7 @@ export default defineComponent({
     align-items: center;
     font-family: mianfeiziti;
   }
-  .mark {
+  .mask {
     position: absolute;
     top: 0;
     left: 0;

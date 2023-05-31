@@ -6,23 +6,32 @@ block content
     @showNext="showNext",
     :class="current === 0 ? '' : 'hidden'"
   )
-  Second.page(v-if="modalCtrl[1]", :class="current === 1 ? '' : 'hidden'")
+  Second.page(
+    v-if="modalCtrl[1]",
+    @showNext="showNext",
+    :class="current === 1 ? '' : 'hidden'"
+  )
+  Third.page(
+    v-if="modalCtrl[2]",
+    @showNext="showNext",
+    :class="current === 2 ? '' : 'hidden'"
+  )
 </template>
 
 <script >
 import First from "./components/first";
 import Second from "./components/second";
+import Third from "./components/third.vue";
 import { defineComponent, ref } from "vue";
 export default defineComponent({
   components: {
     First,
     Second,
+    Third,
   },
   setup() {
-    // const current = ref(0);
-    // const modalCtrl = ref([true, false]);
-    const current = ref(1);
-    const modalCtrl = ref([false, true]);
+    const current = ref(0);
+    const modalCtrl = ref([true, false, false]);
     const showNext = () => {
       modalCtrl.value[current.value + 1] = true;
       setTimeout(() => {
