@@ -61,7 +61,7 @@ audio(:controls="false", autoplay, loop, ref="audio")
 import playIcon from "@/assets/home/play.png";
 import pauseIcon from "@/assets/home/pause.png";
 import { defineComponent, ref, onMounted } from "vue";
-import components from "./home";
+import components from "./homeComponents";
 export default defineComponent({
   components: {
     ...components,
@@ -100,7 +100,7 @@ export default defineComponent({
       }
       playCtrlImg.value = audio.value.paused ? playIcon : pauseIcon;
     };
-    
+
     const strat = () => {
       if (audio.value.paused) {
         changePlayStatus();
