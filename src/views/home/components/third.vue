@@ -2,7 +2,7 @@
 block content
 ._paga_content
   .mask(
-    :class="[showMask ? '' : 'hidden', canClick ? 'click' : '', ]",
+    :class="[showMask ? '' : 'hidden', canClick ? 'click' : '', maskClassName?maskClassName:'']",
     @click="clickMask"
   )
     .text {{ maskText }}
@@ -22,9 +22,11 @@ export default defineComponent({
     const canClick = ref(false);
     const maskText = ref("");
     const showMask = ref(true);
+    const maskClassName = ref("");
     const clickMask = () => {
       maskText.value = "";
-
+      canClick.value = false;
+      maskClassName.value = "flicker";
     };
     let processing = false;
     const start = () => {
@@ -47,13 +49,22 @@ export default defineComponent({
     onMounted(() => {
       start();
     });
-    return { start, showMask, maskText, canClick, clickMask };
+    return { start, showMask, maskText, canClick, clickMask, maskClassName };
   },
 });
 </script>
 
 <style lang="less" scoped>
 @import url(./first.less);
+.flicker {
+  animation-name: flicker, redbg;
+  animation-direction: reverse, normal;
+  animation-timing-function: linear;
+  animation-iteration-count: 2, 1;
+  animation-duration: 0.2s, 1s;
+  animation-delay: 0s, 1s;
+  animation-fill-mode: both, both;
+}
 ._paga_content {
   position: relative;
   overflow: hidden;
