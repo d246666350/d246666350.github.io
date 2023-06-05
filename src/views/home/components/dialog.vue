@@ -40,6 +40,7 @@ export default defineComponent({
             index += 1;
             if (index >= list.length) {
               showNext.value = true;
+              emit("complete", current);
             } else {
               setTimeout(() => {
                 putRow();

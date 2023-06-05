@@ -329,11 +329,12 @@ export default defineComponent({
     animation-duration: 3s;
     animation-fill-mode: forwards;
     animation-delay: 2s;
+    width: 90vw;
+    height: 90 / 16 * 9vw;
     img {
       width: 90vw;
       height: 90 / 16 * 9vw;
       object-fit: fill;
-      margin: -2px;
     }
   }
 }

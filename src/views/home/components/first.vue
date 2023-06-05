@@ -38,6 +38,7 @@ export default defineComponent({
     let processing = false;
     const start = () => {
       if (processing) return;
+      emit("strat");
       processing = true;
       contentClass.value = "animate";
       setTimeout(() => {
@@ -139,14 +140,12 @@ export default defineComponent({
     &.sky {
       width: 44 / 1280 * 5120vh;
       height: 44vh;
-      .center;
     }
   }
   .cloud {
     position: absolute;
     width: 44 / 1280 * 2 * 5120vh;
     height: 44vh;
-    .center;
     background-image: url(~@/assets/home/cloud.png);
     background-size: 50% 100%;
     animation-name: wave;
@@ -160,7 +159,6 @@ export default defineComponent({
     position: absolute;
     width: 44 / 1280 * 2 * 5120vh;
     height: 44vh;
-    .center;
     background-image: url(~@/assets/home/cloud1.png);
     background-size: 50% 100%;
     animation-name: wave;
