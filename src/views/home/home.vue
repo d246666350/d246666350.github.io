@@ -16,13 +16,18 @@ block content
     @showNext="showNext",
     :class="current === 2 ? '' : 'hidden'"
   )
+img.play_ctrl_img(:src="playCtrlImg",@click="changePlayStatus")
+audio(:controls="false" autoplay loop ref="audio")
+  source(src="@/assets/home/bgm.mp3" type="audio/mpeg")
 </template>
 
-<script >
+<script>
 import First from "./components/first";
 import Second from "./components/second";
 import Third from "./components/third.vue";
-import { defineComponent, ref } from "vue";
+import playIcon from "@/assets/home/play.png";
+import pauseIcon from "@/assets/home/pause.png";
+import { defineComponent, ref, onMounted } from "vue";
 export default defineComponent({
   components: {
     First,
@@ -30,8 +35,12 @@ export default defineComponent({
     Third,
   },
   setup() {
-    const current = ref(0);
-    const modalCtrl = ref([true, false, false]);
+    const playCtrlImg = ref(playIcon);
+    const audio = ref(null);
+    // const current = ref(0);
+    // const modalCtrl = ref([true, false, false]);
+    const current = ref(2);
+    const modalCtrl = ref([false, false, true]);
     const showNext = () => {
       modalCtrl.value[current.value + 1] = true;
       setTimeout(() => {
@@ -41,10 +50,28 @@ export default defineComponent({
         }, 2000);
       }, 50);
     };
+
+    const changePlayStatus = () => {
+      if (audio.value.paused) {
+        audio.value.play();
+      } else {
+        audio.value.pause();
+      }
+      playCtrlImg.value = audio.value.paused ? playIcon : pauseIcon;
+    };
+
+    onMounted(() => {
+      setTimeout(() => {
+        playCtrlImg.value = audio.value.paused ? playIcon : pauseIcon;
+      }, 500);
+    });
     return {
       current,
       showNext,
       modalCtrl,
+      audio,
+      playCtrlImg,
+      changePlayStatus,
     };
   },
 });
@@ -66,5 +93,13 @@ export default defineComponent({
       pointer-events: none;
     }
   }
+}
+.play_ctrl_img {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 5vw;
+  height: 5vw;
+  opacity: 0.7;
 }
 </style>

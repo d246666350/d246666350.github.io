@@ -9,7 +9,9 @@ block content
     img.car_body(src="@/assets/home/car.png", alt="")
     img.run(src="@/assets/home/run.png", alt="")
     img.run1(src="@/assets/home/run.png", alt="")
-  img.protagonist(src="@/assets/home/protagonist.gif", alt="")
+  img.protagonist.protagonist2(src="@/assets/home/protagonist2.gif", alt="")
+  img.protagonist.protagonist0(src="@/assets/home/protagonist.gif", alt="")
+  img.protagonist.protagonist1(src="@/assets/home/protagonist1.gif", alt="")
   //- span.title 寻遇之旅
   img.title(src="@/assets/home/title.png", alt="")
   .btn(@click="start")
@@ -102,12 +104,20 @@ export default defineComponent({
       }
     }
     .protagonist {
-      animation-name: protagonist;
       animation-direction: normal;
       animation-timing-function: linear;
       animation-duration: 2s;
       animation-delay: @delay1;
       animation-fill-mode: forwards;
+      &.protagonist0 {
+        animation-name: protagonist;
+      }
+      &.protagonist1 {
+        animation-name: protagonist1;
+      }
+      &.protagonist2 {
+        animation-name: protagonist2;
+      }
     }
     .title {
       animation-name: disappear;
@@ -221,6 +231,16 @@ export default defineComponent({
     // animation-duration: 2s;
     // animation-delay: @delay1;
     // animation-fill-mode: forwards;
+    &.protagonist1 {
+      width: 720 * 0.7 / 4 / 7.2vh;
+      height: 720 * 0.7 / 4 / 7.2vh;
+      bottom: 8vh;
+      right: 16vh;
+    }
+    &.protagonist2 {
+      bottom: 12vh;
+      right: 20vh;
+    }
   }
   .title {
     position: absolute;

@@ -2,61 +2,133 @@
 @delay1: 0s;
 
 .center() {
-    left: 50%;
-    transform: translateX(-50%);
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 @keyframes wave {
-    0% {
-        background-position: center right;
-    }
+  0% {
+    background-position: center right;
+  }
 
-    100% {
-        background-position: center left;
-    }
+  100% {
+    background-position: center left;
+  }
 }
 
 @keyframes roll {
-    0% {
-        transform: rotateZ(0deg);
-    }
+  0% {
+    transform: rotateZ(0deg);
+  }
 
-    100% {
-        transform: rotateZ(360deg);
-    }
+  100% {
+    transform: rotateZ(360deg);
+  }
 }
 
 @keyframes title {
-    0% {
-        top: -2vh;
-    }
+  0% {
+    top: -2vh;
+  }
 
-    100% {
-        top: 10vh;
-    }
+  100% {
+    top: 10vh;
+  }
 }
 
 @keyframes protagonist {
-    0% {
-        bottom: 12vh;
-        right: 2vh;
-    }
+  0% {
+    bottom: 12vh;
+    right: 2vh;
+  }
 
-    80% {
-        bottom: 12vh;
-        right: 22vh;
-        opacity: 1;
-    }
+  40% {
+    bottom: 12vh;
+    right: 2vh;
+  }
 
-    90% {
-        bottom: 12vh;
-        right: 22vh;
-        opacity: 1;
-    }
+  80% {
+    bottom: 12vh;
+    right: 22vh;
+    opacity: 1;
+  }
 
-    100% {
-        bottom: 12vh;
-        right: 22vh;
-        opacity: 0;
-    }
+  90% {
+    bottom: 12vh;
+    right: 22vh;
+    opacity: 1;
+  }
+
+  100% {
+    bottom: 12vh;
+    right: 22vh;
+    opacity: 0;
+  }
+}
+@keyframes protagonist1 {
+  0% {
+    bottom: 8vh;
+    right: 16vh;
+  }
+
+  20% {
+    bottom: 12vh;
+    right: 22vh;
+    opacity: 1;
+  }
+
+  40% {
+    bottom: 12vh;
+    right: 22vh;
+    opacity: 0;
+  }
+
+  60% {
+    bottom: 12vh;
+    right: 22vh;
+    opacity: 0;
+  }
+
+  80% {
+    bottom: 12vh;
+    right: 22vh;
+    opacity: 0;
+  }
+
+  90% {
+    bottom: 12vh;
+    right: 22vh;
+    opacity: 0;
+  }
+
+  100% {
+    bottom: 12vh;
+    right: 22vh;
+    opacity: 0;
+  }
+}
+@keyframes protagonist2 {
+  0% {
+    bottom: 12vh;
+    right: 20vh;
+    opacity: 1;
+  }
+
+  20% {
+    bottom: 12vh;
+    right: 20vh;
+    opacity: 0;
+  }
+
+  40% {
+    bottom: 12vh;
+    right: 20vh;
+    opacity: 0;
+  }
+
+  100% {
+    bottom: 12vh;
+    right: 20vh;
+    opacity: 0;
+  }
 }

@@ -2,7 +2,7 @@
 block content
 ._paga_content
   .mask(
-    :class="[showMask ? '' : 'hidden', canClick ? 'click' : '']",
+    :class="[showMask ? '' : 'hidden', canClick ? 'click' : '', ]",
     @click="clickMask"
   )
     .text {{ maskText }}
@@ -13,7 +13,7 @@ block content
       size="5vh"
     )
 </template>
-    
+
 <script>
 import { defineComponent, ref, onMounted } from "vue";
 import allText from "./text";
@@ -23,7 +23,8 @@ export default defineComponent({
     const maskText = ref("");
     const showMask = ref(true);
     const clickMask = () => {
-      emit("showNext");
+      maskText.value = "";
+
     };
     let processing = false;
     const start = () => {
@@ -50,7 +51,7 @@ export default defineComponent({
   },
 });
 </script>
-    
+
 <style lang="less" scoped>
 @import url(./first.less);
 ._paga_content {
@@ -84,4 +85,3 @@ export default defineComponent({
   }
 }
 </style>
-    
