@@ -69,18 +69,18 @@ export default defineComponent({
   setup() {
     const playCtrlImg = ref(playIcon);
     const audio = ref(null);
-    const current = ref(0);
+    const current = ref(8);
     const modalCtrl = ref([
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
       true,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
+      false
     ]);
     const showNext = () => {
       modalCtrl.value[current.value + 1] = true;

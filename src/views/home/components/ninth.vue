@@ -5,6 +5,7 @@ block content
     :class="[showMask ? '' : 'hidden', canClick ? 'click' : '', maskClassName ? maskClassName : '']",
     @click="clickMask"
   )
+    img.bg(src="@/assets/home/ninth_bg.jpg")
     .text(:data-content="maskText") {{ maskText }}
     van-icon.next(
       v-if="canClick",
@@ -74,6 +75,7 @@ export default defineComponent({
 <style lang="less" scoped>
 @import url(./first.less);
 @import url(./third.less);
+@import url(./seventh.less);
 .next {
   z-index: 2;
 }
@@ -114,6 +116,17 @@ export default defineComponent({
     }
     &.click {
       pointer-events: auto;
+    }
+    .bg {
+      height: 100vh;
+      object-fit: contain;
+      position: absolute;
+      animation-name: bg;
+      animation-direction: normal;
+      animation-timing-function: linear;
+      animation-iteration-count: 1;
+      animation-duration: 300s;
+      animation-fill-mode: both;
     }
     .photo {
       position: absolute;
