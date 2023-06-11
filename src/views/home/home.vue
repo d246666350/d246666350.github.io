@@ -69,17 +69,17 @@ export default defineComponent({
   setup() {
     const playCtrlImg = ref(playIcon);
     const audio = ref(null);
-    const current = ref(8);
+    const current = ref(0);
     const modalCtrl = ref([
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
       true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
       false
     ]);
     const showNext = () => {
@@ -131,17 +131,20 @@ export default defineComponent({
 <style lang="less" scoped>
 .__content {
   background-color: black;
+
   .page {
     transition: all 2s;
     opacity: 1;
     position: absolute;
     top: 0;
+
     &.hidden {
       opacity: 0;
       pointer-events: none;
     }
   }
 }
+
 .play_ctrl_img {
   position: absolute;
   top: 20px;
