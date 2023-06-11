@@ -18,7 +18,7 @@ export const masterRouterMap = [
         name: "home",
         component: () => import("@/views/home/home"),
         meta: {
-          title: "首页",
+          title: "寻遇之旅",
           active: require("@/assets/tabBar/home_a.png"),
           inactive: require("@/assets/tabBar/home_in.png"),
         },

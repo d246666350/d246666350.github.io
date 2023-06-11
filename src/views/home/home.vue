@@ -4,53 +4,53 @@ block content
   First.page(
     v-if="modalCtrl[0]",
     @showNext="showNext",
-    :class="current === 0 ? '' : 'hidden'",
+    :class="current === 0 ? 'show' : 'hidden'",
     @strat="strat"
   )
   Second.page(
     v-if="modalCtrl[1]",
     @showNext="showNext",
-    :class="current === 1 ? '' : 'hidden'"
+    :class="current === 1 ? 'show' : 'hidden'"
   )
   Third.page(
     v-if="modalCtrl[2]",
     @showNext="showNext",
-    :class="current === 2 ? '' : 'hidden'"
+    :class="current === 2 ? 'show' : 'hidden'"
   )
   Fourth.page(
     v-if="modalCtrl[3]",
     @showNext="showNext",
-    :class="current === 3 ? '' : 'hidden'"
+    :class="current === 3 ? 'show' : 'hidden'"
   )
   Fifth.page(
     v-if="modalCtrl[4]",
     @showNext="showNext",
-    :class="current === 4 ? '' : 'hidden'"
+    :class="current === 4 ? 'show' : 'hidden'"
   )
   Sixth.page(
     v-if="modalCtrl[5]",
     @showNext="showNext",
-    :class="current === 5 ? '' : 'hidden'"
+    :class="current === 5 ? 'show' : 'hidden'"
   )
   Seventh.page(
     v-if="modalCtrl[6]",
     @showNext="showNext",
-    :class="current === 6 ? '' : 'hidden'"
+    :class="current === 6 ? 'show' : 'hidden'"
   )
   Eighth.page(
     v-if="modalCtrl[7]",
     @showNext="showNext",
-    :class="current === 7 ? '' : 'hidden'"
+    :class="current === 7 ? 'show' : 'hidden'"
   )
   Ninth.page(
     v-if="modalCtrl[8]",
     @showNext="showNext",
-    :class="current === 8 ? '' : 'hidden'"
+    :class="current === 8 ? 'show' : 'hidden'"
   )
   Tenth.page(
     v-if="modalCtrl[9]",
     @showNext="showNext",
-    :class="current === 9 ? '' : 'hidden'"
+    :class="current === 9 ? 'show' : 'hidden'"
   )
 img.play_ctrl_img(:src="playCtrlImg", @click="changePlayStatus")
 audio(:controls="false", autoplay, loop, ref="audio")
@@ -134,9 +134,12 @@ export default defineComponent({
 
   .page {
     transition: all 2s;
-    opacity: 1;
     position: absolute;
     top: 0;
+
+    &.show {
+      opacity: 1;
+    }
 
     &.hidden {
       opacity: 0;

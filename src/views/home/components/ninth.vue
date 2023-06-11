@@ -32,6 +32,7 @@ export default defineComponent({
       canClick.value = false;
       if (step.value === 4) {
         emit("showNext");
+        return
       }
       step.value += 1;
       maskText.value = "";
